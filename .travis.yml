@@ -3,13 +3,13 @@ language: c
 os:
   - linux
 compiler: 
-  - gcc -coverage
+  - gcc
 addons:
   apt:
     packages:
     - cmake
     - check
 
-script: ./ci
+script: /configure && make && make test
 after_success:
   - bash <(curl -s https://codecov.io/bash)
