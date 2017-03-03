@@ -4,6 +4,11 @@ os:
   - linux
 compiler: 
   - gcc -coverage -O0 main.c -o main ./main gcov main.c
+addons:
+  apt:
+    packages:
+    - cmake
+    - check
 
 script: make ./ci
 after_success:
