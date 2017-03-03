@@ -3,8 +3,13 @@ language: c
 os:
   - linux
 compiler: 
-  - gcc -coverage -O0 main.c -o main ./main gcov main.c
+  - gcc
+addons:
+  apt:
+    packages:
+    - cmake
+    - check
 
-script: make ./ci
+script: /configure && make && make test
 after_success:
   - bash <(curl -s https://codecov.io/bash)
