@@ -10,6 +10,6 @@ addons:
     - cmake
     - check
 
-script: make ./ci
+script: ./ci
 after_success:
   - bash <(curl -s https://codecov.io/bash)
