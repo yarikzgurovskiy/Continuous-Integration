@@ -3,6 +3,8 @@ language: c
 os:
   - linux
 compiler: 
-  - gcc
+  - gcc -coverage -O0 main.c -o main ./main gcov main.c
 
 script: make build
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
