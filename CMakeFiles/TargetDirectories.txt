@@ -1,3 +1,0 @@
-/home/yaroslav/projects/libci/libci/CMakeFiles/edit_cache.dir
-/home/yaroslav/projects/libci/libci/CMakeFiles/rebuild_cache.dir
-/home/yaroslav/projects/libci/libci/CMakeFiles/ci.dir

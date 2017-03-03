@@ -1,1 +1,0 @@
-/usr/bin/cc     CMakeFiles/ci.dir/src/ci.c.o CMakeFiles/ci.dir/src/main.c.o  -o ci -rdynamic -lcheck 

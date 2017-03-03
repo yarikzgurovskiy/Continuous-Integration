@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//gcc main.c ../src/*.c -I../include -lcheck -lprogbase
+//gcc main.c ./src/*.c -I./include -lcheck
 START_TEST (CsvToList_string_free)
 {
     char str[] = "  Vasyl  ,Petrus  ,34,2.645;Mykola,Oliynyk,23,2.4;  Petro, skjflskdf, 24, 3.6;lskdjfl  , lxjjl, 45,   3.7";
