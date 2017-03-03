@@ -1,7 +1,6 @@
 #include "ci.h"
 #include <check.h>
 
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -33,7 +32,7 @@ Suite *test_suite() {
   return s;
 }
 
-int main() {
+int main(void) {
   Suite *s = test_suite();
   SRunner *sr = srunner_create(s);
   srunner_set_fork_status(sr, CK_NOFORK);  // important for debugging!

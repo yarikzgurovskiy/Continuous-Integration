@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/yaroslav/projects/libci/libci/main.c
+ci.h
+/home/yaroslav/projects/libci/libci/ci.h
+check.h
+-
+stdio.h
+-
+stdlib.h
+-
+
+include/ci.h
+

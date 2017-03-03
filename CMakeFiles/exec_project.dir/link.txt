@@ -1,0 +1,1 @@
+/usr/bin/cc     CMakeFiles/exec_project.dir/main.c.o  -o exec_project -rdynamic 
