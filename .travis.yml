@@ -3,7 +3,7 @@ language: c
 os:
   - linux
 compiler: 
-  - gcc -coverage -O0 main.c -o main ./main gcov main.c
+  - gcc -coverage
 addons:
   apt:
     packages:
