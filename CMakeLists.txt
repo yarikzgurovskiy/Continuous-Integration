@@ -15,7 +15,7 @@ file(GLOB LIB_SOURCES "src/*.c")
 project (ci)
 # to build static library target with name libmtmodule.a
 add_library(${CMAKE_PROJECT_NAME} STATIC ${LIB_SOURCES})
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11 -Wall -Werror -pedantic-errors")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99 -Wall -Werror -pedantic-errors")
 
 # to install library headers
 install(
