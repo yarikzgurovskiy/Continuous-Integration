@@ -11,4 +11,7 @@ script:
   - make
   - echo program compiled successfully
 after_success:
+  - gcc -coverage -O0 main.c -o main -I./include -lcheck src/*.c
+  - ./main
+  - gcov main.c
   - bash <(curl -s https://codecov.io/bash)
