@@ -1,4 +1,4 @@
 all:
-	gcc -c -g src/*.c -std=c99 -I./include -Werror -Wall -pedantic-errors -coverage
+	gcc -c -g src/*.c -std=c99 -I./include -Werror -Wall -pedantic-errors -coverage gcov main.c
 	gcc *.o -o a.out -lcheck
 	rm *.o
