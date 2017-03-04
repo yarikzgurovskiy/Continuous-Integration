@@ -4,15 +4,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//gcc main.c ./src/*.c -I./include -lcheck
 START_TEST (CsvToList_string_free)
 {
-    char str[] = "  Vasyl  ,Petrus  ,34,2.645\n\
+    char str[] = "  \
+    Vasyl  ,Petrus  ,34,2.645\n\
     Mykola,Oliynyk,23,2.4\n\
     Petro, Vovchenko, 24, 3.6\n\
-    Stepan  , Glyna, 45,   3.7";
+    Stepan  , Glyna, 45,   3.7\n\
+     Inna , Sgoludko, 21, 4.7\n\
+       Katya, Sydorchuk , 23, 4.23";
     List * studs = CsvToList(str);
-    int size = 4;
+    int size = 6;
     ck_assert_int_eq(List_count(studs), size);
     
     List_freeAllStudents(studs);
@@ -21,12 +23,15 @@ START_TEST (CsvToList_string_free)
 }
 END_TEST
 
-/*START_TEST(getList_str_StudentFromList)
+START_TEST(getList_str_StudentFromList)
 {
-    char str[] = "  Vasyl  ,Petrus  ,34,2.645\n\
+    char str[] = "  \
+    Vasyl  ,Petrus  ,34,2.645\n\
     Mykola,Oliynyk,23,2.4\n\
-      Petro, skjflskdf, 24, 3.6\n\
-      lskdjfl  , lxjjl, 45,   3.7";
+    Petro, Vovchenko, 24, 3.6\n\
+    Stepan  , Glyna, 45,   3.7\n\
+     Inna , Sgoludko, 21, 4.7\n\
+       Katya, Sydorchuk , 23, 4.23";
     List * studs  = CsvToList(str);
     Teacher * pr = Teacher_new("Petro", "Pasko", 23, NULL);
     Teacher_attachStudents(pr, studs);
@@ -36,15 +41,15 @@ END_TEST
     Student_toString(st, buffer);
     ck_assert_str_eq("Mykola,Oliynyk,23,2.4", buffer);
     
-    Student_freeAll(studs);
-    List_clean(studs);
+    List_freeAllStudents(studs);
+    List_freeAllNodes(studs);
     List_free(&studs);
-    Student_freeAll(studs2);
-    List_clean(studs2);
+    List_freeAllStudents(studs2);
+    List_freeAllNodes(studs2);
     List_free(&studs2);
     Teacher_free(&pr);
 }
-END_TEST*/
+END_TEST
 
 /*START_TEST(newTeacher_void_free)
 {
