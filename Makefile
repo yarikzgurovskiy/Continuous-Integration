@@ -1,4 +1,6 @@
 all:
-	clang -c src/*.c -std=c99 -I./include -Werror -Wall -pedantic-errors
-	clang *.o -o a.out -lcheck
+	gcc -c src/*.c -std=c99 -I./include -Werror -Wall -pedantic-errors
+	gcc *.o -o a.out -lcheck
 	rm *.o
+	gcc main.c -c -coverage
+	gcov main.c
