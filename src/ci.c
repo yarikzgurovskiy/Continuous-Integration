@@ -5,13 +5,6 @@
 #include <assert.h>
 #include "ci.h"
 
-struct Student{
-    char name[20];
-    char surname[20];
-    int age;
-    float mark;
-};
-
 struct ListNode{
     ListNode * next;
     void * data;
@@ -19,6 +12,13 @@ struct ListNode{
 
 struct List{
     ListNode * head;
+};
+
+struct Student{
+    char name[20];
+    char surname[20];
+    int age;
+    float mark;
 };
 
 struct Teacher{
@@ -30,8 +30,6 @@ struct Teacher{
 };
 
 #define throw(MSG) assert(0 && MSG);
-
-
 
 Teacher * Teacher_new(char * name, char * surname, int age, char *subject){
     Teacher * self = malloc(sizeof(Teacher));
@@ -58,14 +56,13 @@ List * Teacher_getLowestScore(Teacher  *self, int count){
     List * studs = List_new();
     List * final = List_new();
     List * students = self->students;
-    int i;
-    int j;
+    int i = 0;
+    int j = 0;
     for(i = 0; i < List_count(students); i++){
         Student * st = List_get(students, i);
         Student * new = Student_new(st->name, st->surname, st->age, st->mark);
         List_addLast(studs, new); 
     }
-    
     Student * min = NULL;
     
     for(j = 0; j < count; j++){
@@ -84,8 +81,8 @@ List * Teacher_getLowestScore(Teacher  *self, int count){
         List_removeAt(studs, minIndex);
     }
     //free additional memory
-    Student_freeAll(studs);
-    List_clean(studs);
+    List_freeAllStudents(studs);
+    List_freeAllNodes(studs);
     List_free(&studs);
     return final;
 }
@@ -113,23 +110,6 @@ void Student_free(Student ** selfPtr){
     *selfPtr = NULL;
 }
 
-void Student_freeAll(List * self){
-    int len = List_count(self);
-    int i; 
-    for(i = 0; i < len; i++){
-        Student * st = List_get(self, i);
-        Student_free(&st);
-    }
-}
-
-void Student_print(Student * self){
-    printf("Name: %s\nSurname: %s\nAge: %i\nMark: %f\n",
-    self->name, 
-    self->surname, 
-    self->age, 
-    self->mark);
-}
-
 char * Student_toString(Student * self, char * str){
     sprintf(str,"%s,%s,%i,%f%c", self->name,self->surname, self->age, self->mark, '\0' );
     return str;
@@ -140,7 +120,7 @@ List * CsvToList(char * str){
     char buffer[4][20];
     int word = 0;;
     int wordIndex = 0;
-    int i;
+    int i = 0;;
     for(i = 0; i <= strlen(str); i++){
         char ch = str[i];
         if(isspace(ch) && ch != '\n'){
@@ -168,7 +148,7 @@ char * ListToCsv(char * str, List * self){
     char sign[2];
     sprintf(sign, "%c", '\n');
     int len = List_count(self);
-    int i;
+    int i = 0;;
     for(i = 0; i < len; i++){
         char buf[50];
         Student_toString(List_get(self, i), buf);
@@ -268,7 +248,7 @@ void * List_get(List * self, int position){
     int len = List_count(self);
     if(position >= len || position < 0) throw("Index out of bounds!");
     ListNode * curr = self->head;
-    int i;
+    int i = 0;
     for(i = 0; i < len; i++){
         if(position == i) break;
         curr = curr->next;
@@ -276,9 +256,9 @@ void * List_get(List * self, int position){
     return curr->data;
 }
 
-void List_clean(List * self){
+void List_freeAllNodes(List * self){
     int len = List_count(self);
-    int i;
+    int i = 0;
     for(i = 0; i < len; i++){
         ListNode * curr = self->head;
         if(curr == NULL) return;
@@ -292,5 +272,14 @@ void List_clean(List * self){
         }
         ListNode_free(&(curr->next));
         curr->next = NULL;
+    }
+}
+
+void List_freeAllStudents(List * self){
+    int len = List_count(self);
+    int i = 0; 
+    for(i = 0; i < len; i++){
+        Student * st = List_get(self, i);
+        Student_free(&st);
     }
 }
