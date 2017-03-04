@@ -65,10 +65,12 @@ List * Teacher_getLowestScore(Teacher  *self, int count){
     }
     
     Student * min = NULL;
-    for(int j = 0; j < count; j++){
+    int j;
+    int i;
+    for(j = 0; j < count; j++){
         int minIndex = 0;
         int len = List_count(studs);
-        for(int i = 1; i < len; i++){
+        for(i = 1; i < len; i++){
             min = List_get(studs, minIndex);
             Student * curr = List_get(studs, i);
             if(curr->mark < min->mark){
@@ -136,7 +138,8 @@ List * CsvToList(char * str){
     char buffer[4][20];
     int word = 0;;
     int wordIndex = 0;
-    for(int i = 0; i <= strlen(str); i++){
+    int i;
+    for(i = 0; i <= strlen(str); i++){
         char ch = str[i];
         if(isspace(ch) && ch != '\n'){
             continue;
@@ -163,7 +166,8 @@ char * ListToCsv(char * str, List * self){
     char sign[2];
     sprintf(sign, "%c", '\n');
     int len = List_count(self);
-    for(int i = 0; i < len; i++){
+    int i;
+    for(i = 0; i < len; i++){
         char buf[50];
         Student_toString(List_get(self, i), buf);
         strcat(str, buf);
@@ -262,7 +266,8 @@ void * List_get(List * self, int position){
     int len = List_count(self);
     if(position >= len || position < 0) throw("Index out of bounds!");
     ListNode * curr = self->head;
-    for(int i = 0; i < len; i++){
+    int i;
+    for(i = 0; i < len; i++){
         if(position == i) break;
         curr = curr->next;
     }
@@ -271,7 +276,8 @@ void * List_get(List * self, int position){
 
 void List_clean(List * self){
     int len = List_count(self);
-    for(int i = 0; i < len; i++){
+    int i;
+    for(i = 0; i < len; i++){
         ListNode * curr = self->head;
         if(curr == NULL) return;
         if(curr->next == NULL){

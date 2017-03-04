@@ -1,5 +1,13 @@
 cmake_minimum_required(VERSION 2.8.7)
-
+macro(use_c99)
+  if (CMAKE_VERSION VERSION_LESS "3.1")
+    if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
+      set (CMAKE_C_FLAGS "--std=gnu99 ${CMAKE_C_FLAGS}")
+    endif ()
+  else ()
+    set (CMAKE_C_STANDARD 99)
+  endif ()
+endmacro(use_c99)
 #
 # Common settings
 #
@@ -13,8 +21,10 @@ file(GLOB LIB_SOURCES "src/*.c")
 # first project (static lib)
 #
 project (ci)
+use_c99()
 # to build static library target with name libmtmodule.a
 add_library(${CMAKE_PROJECT_NAME} STATIC ${LIB_SOURCES})
+
 
 # to install library headers
 install(
