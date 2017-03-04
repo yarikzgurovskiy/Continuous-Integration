@@ -2,16 +2,17 @@ sudo: required
 language: c
 os:
   - linux
+
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y check
-  - sudo pip install codecov
+  - sudo apt-get install check lcov
+
+before script:
+  - cmake .
 
 script:
   - make
-  - echo program compiled successfully
+  - make test
+  - lcov --directory . --capture --output-file coverage.info
+
 after_success:
-  - gcc -coverage -O0 main.c -o main -I./include -lcheck src/*.c -std=c99
-  - ./main
-  - gcov main.c
   - bash <(curl -s https://codecov.io/bash)
