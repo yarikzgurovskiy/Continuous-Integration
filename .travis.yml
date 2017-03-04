@@ -7,7 +7,6 @@ compiler:
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y check
-  - sudo apt-get install -y codecov
 
 script:
   - make
