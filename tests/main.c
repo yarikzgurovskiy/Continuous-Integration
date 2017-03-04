@@ -55,7 +55,8 @@ START_TEST(newTeacher_void_free)
 {
     Teacher * pr = Teacher_new("Petro", "Pasko", 23, "OOP");
     Teacher_free(&pr);
-    ck_assert_ptr_eq(pr, NULL);
+    ck_assert_ptr_null(pr);
+    //ck_assert_ptr_eq(pr, NULL);
 } 
 END_TEST
 
