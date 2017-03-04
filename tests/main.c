@@ -22,7 +22,7 @@ START_TEST (CsvToList_string_free)
     List_free(&studs);
 }
 END_TEST
-
+/*
 START_TEST(getList_str_StudentFromList)
 {
     char str[] = "  \
@@ -33,7 +33,7 @@ START_TEST(getList_str_StudentFromList)
      Inna , Sgoludko, 21, 4.7\n\
        Katya, Sydorchuk , 23, 4.23";
     List * studs  = CsvToList(str);
-    Teacher * pr = Teacher_new("Petro", "Pasko", 23, NULL);
+    Teacher * pr = Teacher_new("Petro", "Pasko", 23, "Matan");
     Teacher_attachStudents(pr, studs);
     List * studs2 = Teacher_getLowestScore(pr, 2);
     Student * st = List_get(studs2, 0);
@@ -49,15 +49,15 @@ START_TEST(getList_str_StudentFromList)
     List_free(&studs2);
     Teacher_free(&pr);
 }
-END_TEST
+END_TEST*/
 
-/*START_TEST(newTeacher_void_free)
+START_TEST(newTeacher_void_free)
 {
-    Teacher * pr = Teacher_new("Petro", "Pasko", 23, NULL);
+    Teacher * pr = Teacher_new("Petro", "Pasko", 23, "OOP");
     Teacher_free(&pr);
     ck_assert_ptr_eq(pr, NULL);
 } 
-END_TEST*/
+END_TEST
 
 
 
@@ -66,11 +66,8 @@ Suite *test_suite() {
   TCase *new_free = tcase_create("TestCase");
 
   tcase_add_test(new_free, CsvToList_string_free);
-  //tcase_add_test(new_free, newTeacher_void_free);
+  tcase_add_test(new_free, newTeacher_void_free);
   //tcase_add_test(new_free, getList_str_StudentFromList);
-  
-  
-  
   
   suite_add_tcase(s, new_free);
 
