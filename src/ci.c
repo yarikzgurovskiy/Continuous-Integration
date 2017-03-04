@@ -58,15 +58,16 @@ List * Teacher_getLowestScore(Teacher  *self, int count){
     List * studs = List_new();
     List * final = List_new();
     List * students = self->students;
-    for(int i = 0; i < List_count(students); i++){
+    int i;
+    int j;
+    for(i = 0; i < List_count(students); i++){
         Student * st = List_get(students, i);
         Student * new = Student_new(st->name, st->surname, st->age, st->mark);
         List_addLast(studs, new); 
     }
     
     Student * min = NULL;
-    int j;
-    int i;
+    
     for(j = 0; j < count; j++){
         int minIndex = 0;
         int len = List_count(studs);
@@ -114,7 +115,8 @@ void Student_free(Student ** selfPtr){
 
 void Student_freeAll(List * self){
     int len = List_count(self);
-    for(int i = 0; i < len; i++){
+    int i; 
+    for(i = 0; i < len; i++){
         Student * st = List_get(self, i);
         Student_free(&st);
     }
