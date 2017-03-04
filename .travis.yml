@@ -4,12 +4,9 @@ os:
   - linux
 compiler: 
   - gcc
-addons:
-  apt:
-    packages:
-    - cmake
-    - check
 
-script: /configure && make && make test
+script:
+  - ./a.out
+  - echo program compiled successfully
 after_success:
   - bash <(curl -s https://codecov.io/bash)
