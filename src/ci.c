@@ -138,13 +138,13 @@ List * CsvToList(char * str){
     int wordIndex = 0;
     for(int i = 0; i <= strlen(str); i++){
         char ch = str[i];
-        if(isspace(ch)){
+        if(isspace(ch) && ch != '\n'){
             continue;
         }else if(ch == ','){
             buffer[word][wordIndex] = '\0';
             word++;
             wordIndex = 0; 
-        } else if(ch == ';' || ch == '\0'){
+        } else if(ch == '\n' || ch == '\0'){
             buffer[word][wordIndex] = '\0';
             word = 0;
             wordIndex = 0;
@@ -161,7 +161,7 @@ List * CsvToList(char * str){
 char * ListToCsv(char * str, List * self){
     sprintf(str, "%c", '\0');
     char sign[2];
-    sprintf(sign, "%c", ';');
+    sprintf(sign, "%c", '\n');
     int len = List_count(self);
     for(int i = 0; i < len; i++){
         char buf[50];
