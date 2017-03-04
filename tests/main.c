@@ -22,7 +22,7 @@ START_TEST (CsvToList_string_free)
     List_free(&studs);
 }
 END_TEST
-/*
+
 START_TEST(getList_str_StudentFromList)
 {
     char str[] = "  \
@@ -39,7 +39,11 @@ START_TEST(getList_str_StudentFromList)
     Student * st = List_get(studs2, 0);
     char buffer[100];
     Student_toString(st, buffer);
-    ck_assert_str_eq("Mykola,Oliynyk,23,2.4", buffer);
+    ck_assert_str_eq("Mykola,Oliynyk,23,2.40", buffer);
+
+    st = List_get(studs2, 1);
+    Student_toString(st, buffer);
+    ck_assert_str_eq("Vasyl,Petrus,34,2.64", buffer);
     
     List_freeAllStudents(studs);
     List_freeAllNodes(studs);
@@ -49,18 +53,17 @@ START_TEST(getList_str_StudentFromList)
     List_free(&studs2);
     Teacher_free(&pr);
 }
-END_TEST*/
+END_TEST
 /*
 START_TEST(newTeacher_void_free)
 {
     Teacher * pr = Teacher_new("Petro", "Pasko", 23, "OOP");
     Teacher_free(&pr);
     ck_assert_ptr_null(pr);
-    //ck_assert_ptr_eq(pr, NULL);
 } 
-END_TEST*/
+END_TEST
 
-
+*/
 
 Suite *test_suite() {
   Suite *s = suite_create("Module");
@@ -68,7 +71,7 @@ Suite *test_suite() {
 
   tcase_add_test(new_free, CsvToList_string_free);
   //tcase_add_test(new_free, newTeacher_void_free);
-  //tcase_add_test(new_free, getList_str_StudentFromList);
+  tcase_add_test(new_free, getList_str_StudentFromList);
   
   suite_add_tcase(s, new_free);
 
@@ -78,7 +81,7 @@ Suite *test_suite() {
 int main(void) {
   Suite *s = test_suite();
   SRunner *sr = srunner_create(s);
-  srunner_set_fork_status(sr, CK_NOFORK);  // important for debugging!
+  //srunner_set_fork_status(sr, CK_NOFORK);  // important for debugging!
 
   srunner_run_all(sr, CK_VERBOSE);
 

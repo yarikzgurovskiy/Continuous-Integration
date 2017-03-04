@@ -111,7 +111,7 @@ void Student_free(Student ** selfPtr){
 }
 
 char * Student_toString(Student * self, char * str){
-    sprintf(str,"%s,%s,%i,%f%c", self->name,self->surname, self->age, self->mark, '\0' );
+    sprintf(str,"%s,%s,%i,%.2f%c", self->name,self->surname, self->age, self->mark, '\0' );
     return str;
 }
 
