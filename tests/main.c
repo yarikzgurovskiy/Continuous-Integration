@@ -15,8 +15,8 @@ START_TEST (CsvToList_string_free)
     int size = 4;
     ck_assert_int_eq(List_count(studs), size);
     
-    Student_freeAll(studs);
-    List_clean(studs);
+    List_freeAllStudents(studs);
+    List_freeAllNodes(studs);
     List_free(&studs);
 }
 END_TEST
