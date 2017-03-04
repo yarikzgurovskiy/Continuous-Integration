@@ -2,8 +2,6 @@ sudo: required
 language: c
 os:
   - linux
-compiler: 
-  - gcc
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y check
