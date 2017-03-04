@@ -46,13 +46,13 @@ START_TEST(getList_str_StudentFromList)
 }
 END_TEST
 
-START_TEST(newTeacher_void_free)
+/*START_TEST(newTeacher_void_free)
 {
     Teacher * pr = Teacher_new("Petro", "Pasko", 23, NULL);
     Teacher_free(&pr);
     ck_assert_ptr_eq(pr, NULL);
 } 
-END_TEST
+END_TEST*/
 
 
 
@@ -61,7 +61,7 @@ Suite *test_suite() {
   TCase *new_free = tcase_create("TestCase");
 
   tcase_add_test(new_free, CsvToList_string_free);
-  tcase_add_test(new_free, newTeacher_void_free);
+  //tcase_add_test(new_free, newTeacher_void_free);
   tcase_add_test(new_free, getList_str_StudentFromList);
   
   
