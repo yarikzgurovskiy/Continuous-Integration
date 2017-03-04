@@ -21,6 +21,39 @@ START_TEST (CsvToList_string_free)
 }
 END_TEST
 
+START_TEST(getList_str_StudentFromList)
+{
+    char str[] = "  Vasyl  ,Petrus  ,34,2.645\n\
+    Mykola,Oliynyk,23,2.4\n\
+      Petro, skjflskdf, 24, 3.6\n\
+      lskdjfl  , lxjjl, 45,   3.7";
+    List * studs  = CsvToList(str);
+    Teacher * pr = Teacher_new("Petro", "Pasko", 23, NULL);
+    Teacher_attachStudents(pr, studs);
+    List * studs2 = Teacher_getLowestScore(pr, 2);
+    Student * st = List_get(studs2, 0);
+    char buffer[100];
+    Student_toString(st, buffer);
+    ck_assert_str_eq("Vasyl,Petrus,34,2.645", buffer);
+    
+    Student_freeAll(studs);
+    List_clean(studs);
+    List_free(&studs);
+    Student_freeAll(studs2);
+    List_clean(studs2);
+    List_free(&studs2);
+    Teacher_free(&pr);
+}
+END_TEST
+
+START_TEST(newTeacher_void_free)
+{
+    Teacher * pr = Teacher_new("Petro", "Pasko", 23, NULL);
+    Teacher_free(&pr);
+    ck_assert_ptr_null(pr);
+} 
+END_TEST
+
 
 
 Suite *test_suite() {
@@ -28,6 +61,10 @@ Suite *test_suite() {
   TCase *new_free = tcase_create("TestCase");
 
   tcase_add_test(new_free, CsvToList_string_free);
+  tcase_add_test(new_free, newTeacher_void_free);
+  tcase_add_test(new_free, getList_str_StudentFromList);
+  
+  
   
   
   suite_add_tcase(s, new_free);
