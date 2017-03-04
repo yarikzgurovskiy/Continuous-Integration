@@ -7,6 +7,9 @@ compiler:
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y check
+env:
+  global:
+    - CODECOV_TOKEN=:078d6753-93a5-44bb-8439-967c0cff8c12
 
 script:
   - make
