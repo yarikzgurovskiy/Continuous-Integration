@@ -119,8 +119,8 @@ END_TEST
 START_TEST (getList_CsvString_StudentsFromTeacherList)
 {
     char str[] = "  \
-    Vasyl  ,Petrus  ,34,4.645\n\
     Mykola,Oliynyk,23,2.6\n\
+    Vasyl  ,Petrus  ,34,4.645\n\
     Petro, Vovchenko, 24, 3.6\n\
     Stepan  , Glyna, 45,   3.7\n\
      Inna , Sgoludko, 21, 4.7\n\
