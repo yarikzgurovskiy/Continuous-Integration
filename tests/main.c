@@ -25,6 +25,19 @@ START_TEST (CsvToList_CsvString_ListOfStudentsWithCorrectSize)
 }
 END_TEST
 
+START_TEST (CsvToList_EmptyString_EmptyListOfStudents)
+{
+  char str[] = "";
+  List * studs = CsvLoad_toList(str);
+  int size = 0;
+  ck_assert_int_eq(size, List_count(studs));
+
+  freeAllStudents(studs);
+  List_freeAllNodes(studs);
+  List_free(&studs);
+}
+END_TEST
+
 START_TEST (getList_CsvString_StudentsFromTeacherList)
 {
     char str[] = "  \
@@ -57,7 +70,7 @@ START_TEST (getList_CsvString_StudentsFromTeacherList)
 }
 END_TEST
 
-START_TEST(newTeacher_fieldsForTeacher_freePtr)
+START_TEST(freeTeacher_fieldsForTeacher_freePtr)
 {
     Teacher * pr = Teacher_new("Petro", "Pasko", 23, "OOP");
     Teacher_free(&pr);
@@ -65,15 +78,65 @@ START_TEST(newTeacher_fieldsForTeacher_freePtr)
 } 
 END_TEST
 
+START_TEST(freeStudent_fieldsForStudent_freePtr)
+{
+    Student * st = Student_new("Petro", "Pasko", 23, 3.5);
+    Student_free(&st);
+    ck_assert_ptr_null(st);
+} 
+END_TEST
+
+START_TEST(ListToCsv_ListOfStudents_CsvString)
+{
+    List * studs = List_new();
+    Student * s1 = Student_new("Pavlo", "Laychuk", 22, 4.3);
+    Student * s2 = Student_new("Anna", "Manko", 20, 3.5);
+    Student * s3 = Student_new("Maryna", "Panchuk", 18, 4.24);
+    List_addLast(studs, s1);
+    List_addLast(studs, s2);
+    List_addLast(studs, s3);
+    char str[200];
+    str[0] = '\0';
+
+    CsvLoad_fromList(str, studs);
+    ck_assert_str_eq(str, "Pavlo,Laychuk,22,4.30\nAnna,Manko,20,3.50\nMaryna,Panchuk,18,4.24");
+
+    //free memory
+    freeAllStudents(studs);
+    List_freeAllNodes(studs);
+    List_free(&studs);
+    ck_assert_ptr_null(studs);
+}
+END_TEST
+
+START_TEST(ListToCsv_EmptyListOfStudents_EmptyString)
+{
+  List * studs = List_new();
+  char str[200];
+  str[0] = '\0';
+
+  CsvLoad_fromList(str, studs);
+  ck_assert_str_eq("", str);
+
+  List_free(&studs);
+}
+END_TEST
+
 
 
 Suite *test_suite() {
   Suite *s = suite_create("Student");
   TCase *tc_core = tcase_create("Core");
+  
+  tcase_add_test(tc_core, freeTeacher_fieldsForTeacher_freePtr);
+  tcase_add_test(tc_core, freeStudent_fieldsForStudent_freePtr);
 
   tcase_add_test(tc_core, CsvToList_CsvString_ListOfStudentsWithCorrectSize);
+  tcase_add_test(tc_core, CsvToList_EmptyString_EmptyListOfStudents);
+
+  tcase_add_test(tc_core, ListToCsv_ListOfStudents_CsvString);
+  tcase_add_test(tc_core, ListToCsv_EmptyListOfStudents_EmptyString);
   tcase_add_test(tc_core, getList_CsvString_StudentsFromTeacherList);
-  tcase_add_test(tc_core, newTeacher_fieldsForTeacher_freePtr);
   
   
   suite_add_tcase(s, tc_core);

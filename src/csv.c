@@ -20,7 +20,7 @@ List * CsvLoad_toList(char * str){
             buffer[word][wordIndex] = '\0';
             word++;
             wordIndex = 0; 
-        } else if(ch == '\n' || ch == '\0'){
+        } else if((ch == '\n' || ch == '\0') && i != 0){
             buffer[word][wordIndex] = '\0';
             word = 0;
             wordIndex = 0;
@@ -44,7 +44,10 @@ char * CsvLoad_fromList(char * str, List * self){
         char buf[50];
         Student_toString(List_get(self, i), buf);
         strcat(str, buf);
-        if(i == len - 1) sprintf(sign, "%c" ,'\0');
+        if(i == len - 1) {
+            sprintf(sign, "%c" ,'\0');
+            break;
+        }
         strcat(str, sign);
     }
     return str;
