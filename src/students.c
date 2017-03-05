@@ -106,6 +106,19 @@ void Student_free(Student ** selfPtr){
     *selfPtr = NULL;
 }
 
+char * Student_getName(Student * self){
+    return self->name;
+}
+char * Student_getSurname(Student * self){
+    return self->surname;
+}
+int Student_getAge(Student * self){
+    return self->age;
+}
+float Student_getMark(Student * self){
+    return self->mark;
+}
+
 char * Student_toString(Student * self, char * str){
     sprintf(str,"%s,%s,%i,%.2f%c", self->name,self->surname, self->age, self->mark, '\0' );
     return str;

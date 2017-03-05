@@ -9,6 +9,11 @@ Student * Student_new(char * name, char * surname, int age, float mark);
 Student * Student_newFromStringArray(char buffer[4][20]);
 void Student_free(Student ** selfPtr);
 
+char * Student_getName(Student * self);
+char * Student_getSurname(Student * self);
+int Student_getAge(Student * self);
+float Student_getMark(Student * self);
+
 char * Student_toString(Student * self, char * str);
 
 Teacher * Teacher_new(char * name, char * surname, int age, char *subject);
