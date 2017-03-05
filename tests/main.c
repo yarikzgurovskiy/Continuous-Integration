@@ -56,7 +56,7 @@ START_TEST (getList_CsvString_StudentsFromTeacherList)
     Teacher_free(&pr);
 }
 END_TEST
-/*
+
 START_TEST(newTeacher_fieldsForTeacher_freePtr)
 {
     Teacher * pr = Teacher_new("Petro", "Pasko", 23, "OOP");
@@ -65,7 +65,7 @@ START_TEST(newTeacher_fieldsForTeacher_freePtr)
 } 
 END_TEST
 
-*/
+
 
 Suite *test_suite() {
   Suite *s = suite_create("Student");
@@ -73,7 +73,7 @@ Suite *test_suite() {
 
   tcase_add_test(tc_core, CsvToList_CsvString_ListOfStudentsWithCorrectSize);
   tcase_add_test(tc_core, getList_CsvString_StudentsFromTeacherList);
-  //tcase_add_test(tc_core, fieldsForTeacher_freePtr);
+  tcase_add_test(tc_core, newTeacher_fieldsForTeacher_freePtr);
   
   
   suite_add_tcase(s, tc_core);

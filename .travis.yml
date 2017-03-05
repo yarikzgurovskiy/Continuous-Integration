@@ -3,9 +3,12 @@ language: c
 os:
   - linux
 
-before_install:
-  - sudo apt-get install -y check 
+before_install: 
   - sudo apt-get install -y lcov
+install:
+  - wget https://github.com/libcheck/check/releases/download/0.11.0/check-0.11.0.tar.gz
+  - tar -xzvf check-0.11.0.tar.gz
+  - pushd check-0.11.0 && ./configure --prefix=/usr && make && sudo make install && popd
 
   
 script:
