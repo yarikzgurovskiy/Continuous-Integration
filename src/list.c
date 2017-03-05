@@ -68,20 +68,7 @@ void List_removeFirst(struct List * self) {
     self->head = node->next;
     ListNode_free(&node);
 }
-void List_removeLast(struct List * self) {
-    struct ListNode * cur = self->head;
-    if (cur == NULL) return;
-    if (cur->next == NULL) {
-          ListNode_free(&cur);
-          self->head = NULL;
-          return;
-    }
-    while (cur->next->next != NULL) {
-          cur = cur->next;
-    }
-    ListNode_free(&(cur->next));
-    cur->next = NULL;
-}
+
 void List_removeAt(struct List * self, int position) {
     if(position == 0) {
         List_removeFirst(self);

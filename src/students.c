@@ -79,6 +79,10 @@ List * Teacher_getLowestScore(Teacher  *self, int count){
     return final;
 }
 
+List * Teacher_getStudents(Teacher * self){
+    return self->students;
+}
+
 Student * Student_new(char * name, char * surname, int age, float mark){
     Student * self = malloc(sizeof(Student));
     strcpy(self->name, name);

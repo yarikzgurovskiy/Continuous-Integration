@@ -16,6 +16,7 @@ void Teacher_free(Teacher ** selfPtr);
 
 Teacher * Teacher_attachStudents(Teacher *self, List * students);
 List * Teacher_getLowestScore(Teacher  *self, int count);
+List * Teacher_getStudents(Teacher * self);
 
 void freeAllStudents(List * self);
 

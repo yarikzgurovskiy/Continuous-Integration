@@ -15,6 +15,5 @@ void ListNode_free(ListNode ** self); //node destructor
 
 void List_addLast(List * self, void * ref);
 void List_removeFirst(List * self);
-void List_removeLast(List * self);
 void List_removeAt(List * self, int position);
 #endif //LIST_H

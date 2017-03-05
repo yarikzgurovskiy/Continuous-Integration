@@ -122,24 +122,46 @@ START_TEST(ListToCsv_EmptyListOfStudents_EmptyString)
 }
 END_TEST
 
+START_TEST(AttachStudents_TeacherAndStudents_TeacherWithAttachedList)
+{
+  Teacher * pr = Teacher_new("Oleksiy", "Petrenko", 32, "ASD");
+  List * studs = List_new();
+  Student * s1 = Student_new("Pavlo", "Laychuk", 22, 4.3);
+  Student * s2 = Student_new("Anna", "Manko", 20, 3.5);
+  Student * s3 = Student_new("Maryna", "Panchuk", 18, 4.24);
+  List_addLast(studs, s1);
+  List_addLast(studs, s2);
+  List_addLast(studs, s3);
+  Teacher_attachStudents(pr, studs);
+
+  ck_assert_ptr_eq(studs, Teacher_getStudents(pr));
+  freeAllStudents(studs);
+  List_freeAllNodes(studs);
+  List_free(&studs);
+  Teacher_free(&pr);
+}
+END_TEST
+
 
 
 Suite *test_suite() {
-  Suite *s = suite_create("Student");
-  TCase *tc_core = tcase_create("Core");
+  Suite *s = suite_create("Students");
+  TCase *tc_case = tcase_create("Case");
   
-  tcase_add_test(tc_core, freeTeacher_fieldsForTeacher_freePtr);
-  tcase_add_test(tc_core, freeStudent_fieldsForStudent_freePtr);
+  tcase_add_test(tc_case, freeTeacher_fieldsForTeacher_freePtr);
+  tcase_add_test(tc_case, freeStudent_fieldsForStudent_freePtr);
 
-  tcase_add_test(tc_core, CsvToList_CsvString_ListOfStudentsWithCorrectSize);
-  tcase_add_test(tc_core, CsvToList_EmptyString_EmptyListOfStudents);
+  tcase_add_test(tc_case, CsvToList_CsvString_ListOfStudentsWithCorrectSize);
+  tcase_add_test(tc_case, CsvToList_EmptyString_EmptyListOfStudents);
 
-  tcase_add_test(tc_core, ListToCsv_ListOfStudents_CsvString);
-  tcase_add_test(tc_core, ListToCsv_EmptyListOfStudents_EmptyString);
-  tcase_add_test(tc_core, getList_CsvString_StudentsFromTeacherList);
+  tcase_add_test(tc_case, ListToCsv_ListOfStudents_CsvString);
+  tcase_add_test(tc_case, ListToCsv_EmptyListOfStudents_EmptyString);
+
+  tcase_add_test(tc_case, AttachStudents_TeacherAndStudents_TeacherWithAttachedList);
+  tcase_add_test(tc_case, getList_CsvString_StudentsFromTeacherList);
   
   
-  suite_add_tcase(s, tc_core);
+  suite_add_tcase(s, tc_case);
 
   return s;
 }
